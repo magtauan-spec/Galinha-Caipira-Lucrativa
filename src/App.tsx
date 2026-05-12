@@ -215,12 +215,12 @@ export default function App() {
               fetchPriority="high"
               decoding="async"
             />
-            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 uppercase tracking-tight md:tracking-tighter">
+            <h1 className="text-4xl md:text-6xl font-black leading-[1.1] mb-8 uppercase tracking-tight md:tracking-tighter">
               Guia Completo Para Criar <br className="hidden md:block" />
-              <span className="text-brand-yellow underline decoration-brand-yellow/30 underline-offset-[12px] md:underline-offset-[20px]">Galinha Caipira</span> no Quintal e Gerar <span className="underline decoration-green-600 underline-offset-[12px] md:underline-offset-[20px]">Renda Todo Mês</span>
+              <span className="text-brand-yellow underline decoration-brand-yellow/30 underline-offset-8 md:underline-offset-[20px]">Galinha Caipira</span> no Quintal e Gerar <span className="underline decoration-green-600 underline-offset-8 md:underline-offset-[20px]">Renda Todo Mês</span>
             </h1>
             <p className="text-xl md:text-3xl text-gray-300 font-medium mb-12 max-w-4xl mx-auto leading-tight md:leading-relaxed px-2">
-              Aprenda a <span className="underline underline-offset-4 decoration-brand-yellow">montar seu galinheiro</span>, <span className="underline underline-offset-4 decoration-brand-yellow">produzir ovos todo dia</span> e <span className="underline underline-offset-4 decoration-brand-yellow">vender direto</span> para clientes da sua região — mesmo <span className="underline underline-offset-4 decoration-brand-yellow">começando do zero</span> e com pouco espaço.
+              Aprenda a <span className="underline underline-offset-4">montar seu galinheiro</span>, <span className="underline underline-offset-4">produzir ovos todo dia</span> e <span className="underline underline-offset-4">vender direto</span> para clientes da sua região — mesmo <span className="underline underline-offset-4">começando do zero</span> e com pouco espaço.
             </p>
           </motion.div>
 
