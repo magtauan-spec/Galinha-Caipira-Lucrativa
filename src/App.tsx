@@ -47,6 +47,15 @@ const Card = ({ children, className = "", ...props }: React.HTMLAttributes<HTMLD
 // --- Page Sections ---
 
 export default function App() {
+  const [offerTime, setOfferTime] = useState(900); // 15:00
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setOfferTime(prev => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
   const [showUpsell, setShowUpsell] = useState(false);
   const [timeLeft, setTimeLeft] = useState(899); // 14:59 in seconds
@@ -572,9 +581,19 @@ export default function App() {
               <div className="mb-10 px-4">
                 <img src="https://i.imgur.com/lcN01Ka.png" className="w-56 h-auto" alt="Completo" />
               </div>
-              <div className="bg-brand-blue text-white w-full py-2 px-4 rounded-xl text-xs font-bold mb-6 text-center shadow-lg">
+              <div className="bg-brand-blue text-white w-full py-2 px-4 rounded-xl text-xs font-bold mb-4 text-center shadow-lg">
                 TODOS OS BÔNUS INCLUSOS
               </div>
+
+              {/* Scarcity Timer */}
+              <div className="flex flex-col items-center mb-6 bg-brand-red/5 w-full py-3 rounded-2xl border border-brand-red/10 group">
+                <div className="flex items-center gap-2 text-brand-red font-black animate-pulse group-hover:scale-105 transition-transform">
+                  <Clock className="w-5 h-5" />
+                  <span className="text-2xl tabular-nums">{formatTime(offerTime)}</span>
+                </div>
+                <p className="text-brand-red text-[10px] font-bold uppercase mt-1 tracking-wider">Aproveite! Esta oferta expira em instantes</p>
+              </div>
+
               <ul className="space-y-2 mb-12 w-full text-left text-sm overflow-y-auto max-h-60">
                 <li className="flex gap-2"><Check className="w-5 h-5 text-yellow-500 shrink-0" /> Criação Lucrativa de Galinha Caipira</li>
                 <li className="flex gap-2"><Check className="w-5 h-5 text-yellow-500 shrink-0" /> Bônus #1: Guia de Ração Caseira</li>
