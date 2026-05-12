@@ -613,7 +613,7 @@ export default function App() {
                   <Button 
                     onClick={() => {
                       trackPurchase(27.00, 'Plano Completo');
-                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/q6wzn3j');
+                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/pmtdwhm_881699');
                     }}
                     className="w-full bg-green-600 hover:bg-green-500 shadow-xl shadow-green-600/20 text-white font-bold"
                   >
@@ -816,7 +816,7 @@ export default function App() {
                   <Button
                     onClick={() => {
                       trackPurchase(19.90, 'Upsell Plano Pro');
-                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/3e6v5wt');
+                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/z3ffxps_881698');
                     }}
                     className="w-full bg-brand-yellow hover:bg-yellow-400 text-black shadow-xl shadow-brand-yellow/20"
                   >
@@ -827,7 +827,7 @@ export default function App() {
                 <button
                   onClick={() => {
                     trackPurchase(9.90, 'Plano Básico');
-                    window.location.href = getRedirectUrl('https://pay.cakto.com.br/5ubdjm9');
+                    window.location.href = getRedirectUrl('https://pay.cakto.com.br/ouqm8ok_881697');
                   }}
                   className="text-zinc-500 hover:text-white text-xs font-bold uppercase transition-colors"
                 >
