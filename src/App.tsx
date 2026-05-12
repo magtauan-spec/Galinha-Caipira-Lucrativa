@@ -95,8 +95,13 @@ export default function App() {
     };
 
     fbPixel(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    (window as any).fbq('init', '1476955030061377');
-    (window as any).fbq('track', 'PageView');
+    
+    // Only init if not already initialized to avoid duplication
+    if (typeof (window as any).fbq !== 'undefined') {
+      (window as any).fbq('init', '1476955030061377');
+      // Removed manual PageView here as it's often handled by UTMify or auto-events, 
+      // preventing the duplication reported by the user.
+    }
   }, []);
 
   const trackIC = () => {
@@ -612,8 +617,8 @@ export default function App() {
                 >
                   <Button 
                     onClick={() => {
-                      trackPurchase(27.00, 'Plano Completo');
-                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/pmtdwhm_881699');
+                      trackIC();
+                      window.location.href = getRedirectUrl('https://checkout.bigmaney.com/checkout/cmp35t4dv00651yrmzf0bdrj2?offer=ISSA6SP');
                     }}
                     className="w-full bg-green-600 hover:bg-green-500 shadow-xl shadow-green-600/20 text-white font-bold"
                   >
@@ -815,8 +820,8 @@ export default function App() {
                 >
                   <Button
                     onClick={() => {
-                      trackPurchase(19.90, 'Upsell Plano Pro');
-                      window.location.href = getRedirectUrl('https://pay.cakto.com.br/z3ffxps_881698');
+                      trackIC();
+                      window.location.href = getRedirectUrl('https://checkout.bigmaney.com/checkout/cmp35t4dv00651yrmzf0bdrj2?offer=VGMG02J');
                     }}
                     className="w-full bg-brand-yellow hover:bg-yellow-400 text-black shadow-xl shadow-brand-yellow/20"
                   >
@@ -826,8 +831,8 @@ export default function App() {
                 
                 <button
                   onClick={() => {
-                    trackPurchase(9.90, 'Plano Básico');
-                    window.location.href = getRedirectUrl('https://pay.cakto.com.br/ouqm8ok_881697');
+                    trackIC();
+                    window.location.href = getRedirectUrl('https://checkout.bigmaney.com/checkout/cmp35t4dv00651yrmzf0bdrj2?offer=4X90TB1');
                   }}
                   className="text-zinc-500 hover:text-white text-xs font-bold uppercase transition-colors"
                 >
