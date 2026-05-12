@@ -190,16 +190,30 @@ export default function App() {
       </div>
 
       {/* 2. Hero Section */}
-      <section className="bg-gradient-hero pt-16 pb-24 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-          <img src="https://i.imgur.com/lcN01Ka.png" alt="Criação Lucrativa" className="w-full max-w-2xl mb-10" referrerPolicy="no-referrer" />
-          <h1 className="text-4xl md:text-6xl font-black leading-tight mb-8 uppercase tracking-tighter">
-            Guia Completo Para Criar <br />
-            <span className="text-brand-yellow underline decoration-brand-yellow/30 underline-offset-8">Galinha Caipira</span> no Quintal ou Sítio e Gerar <span className="underline decoration-green-600 underline-offset-8">Renda Todo Mês</span>
-          </h1>
-          <p className="text-lg md:text-2xl text-gray-300 font-medium mb-12 max-w-3xl leading-relaxed">
-            Aprenda a <span className="underline underline-offset-4 decoration-brand-yellow">montar seu galinheiro</span>, <span className="underline underline-offset-4 decoration-brand-yellow">produzir ovos todo dia</span> e <span className="underline underline-offset-4 decoration-brand-yellow">vender direto</span> para clientes da sua região — mesmo <span className="underline underline-offset-4 decoration-brand-yellow">começando do zero</span> e com pouco espaço.
-          </p>
+      <section className="bg-gradient-hero pt-16 pb-12 md:pb-24 px-4 overflow-hidden">
+        <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="w-full"
+          >
+            <img 
+              src="https://i.imgur.com/lcN01Ka.png" 
+              alt="Criação Lucrativa" 
+              className="w-full max-w-2xl mx-auto mb-10 drop-shadow-2xl" 
+              referrerPolicy="no-referrer"
+              fetchPriority="high"
+              decoding="async"
+            />
+            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 uppercase tracking-tight md:tracking-tighter">
+              Guia Completo Para Criar <br className="hidden md:block" />
+              <span className="text-brand-yellow underline decoration-brand-yellow/30 underline-offset-[12px] md:underline-offset-[20px]">Galinha Caipira</span> no Quintal e Gerar <span className="underline decoration-green-600 underline-offset-[12px] md:underline-offset-[20px]">Renda Todo Mês</span>
+            </h1>
+            <p className="text-xl md:text-3xl text-gray-300 font-medium mb-12 max-w-4xl mx-auto leading-tight md:leading-relaxed px-2">
+              Aprenda a <span className="underline underline-offset-4 decoration-brand-yellow">montar seu galinheiro</span>, <span className="underline underline-offset-4 decoration-brand-yellow">produzir ovos todo dia</span> e <span className="underline underline-offset-4 decoration-brand-yellow">vender direto</span> para clientes da sua região — mesmo <span className="underline underline-offset-4 decoration-brand-yellow">começando do zero</span> e com pouco espaço.
+            </p>
+          </motion.div>
 
 
           
@@ -209,8 +223,8 @@ export default function App() {
               <span className="text-sm">Receba tudo na hora no seu WhatsApp e e-mail</span>
             </div>
             <div className="flex gap-6">
-              <img src="https://centraldaeducacao.site/assets/icon-whatsapp-Cl5KKOau.avif" className="w-10 h-10 object-contain" alt="WhatsApp" referrerPolicy="no-referrer" />
-              <img src="https://i.imgur.com/9SMb1ES.jpeg" className="w-10 h-10 object-contain" alt="E-mail" referrerPolicy="no-referrer" />
+              <img src="https://centraldaeducacao.site/assets/icon-whatsapp-Cl5KKOau.avif" className="w-10 h-10 object-contain" alt="WhatsApp" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+              <img src="https://i.imgur.com/9SMb1ES.jpeg" className="w-10 h-10 object-contain" alt="E-mail" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -243,6 +257,8 @@ export default function App() {
                     alt={`Preview ${i}`}
                     className="w-full h-auto rounded-2xl shadow-xl border border-gray-100 hover:scale-105 transition-transform duration-300"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               ))}
@@ -293,6 +309,8 @@ export default function App() {
               alt="Comparação Material" 
               className="w-full max-w-4xl h-auto rounded-3xl"
               referrerPolicy="no-referrer"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           
@@ -362,7 +380,7 @@ export default function App() {
           <p className="text-xl text-gray-300 mb-12">Imagine olhar seu quintal e <span className="text-white font-bold">saber exatamente como começar</span> sua criação.</p>
           
           <div className="grid md:grid-cols-2 gap-12 items-center text-left">
-            <img src="https://i.imgur.com/NLCjef2.jpeg" className="rounded-2xl" alt="Conquista" referrerPolicy="no-referrer" />
+            <img src="https://i.imgur.com/NLCjef2.jpeg" className="rounded-2xl" alt="Conquista" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
             <ul className="space-y-4">
               <li className="flex gap-3 items-center">
                 <Check className="w-6 h-6 text-brand-yellow" />
@@ -438,7 +456,7 @@ export default function App() {
           
           <div className="grid md:grid-cols-2 gap-12 bg-white rounded-[3rem] p-8 md:p-16 text-black items-center">
             <div className="relative">
-              <img src="https://i.imgur.com/lcN01Ka.png" className="w-full h-auto" alt="Kit Contents" referrerPolicy="no-referrer" />
+              <img src="https://i.imgur.com/lcN01Ka.png" className="w-full h-auto" alt="Kit Contents" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
               <div className="absolute -top-4 -left-4 bg-brand-red text-white py-2 px-6 rounded-xl font-bold transform -rotate-3">
                 ACESSO IMEDIATO
               </div>
@@ -495,7 +513,7 @@ export default function App() {
             {bonuses.map(bonus => (
               <div key={bonus.id} className="bg-white rounded-3xl overflow-hidden flex flex-col group hover:shadow-2xl transition-shadow">
                 <div className="relative">
-                  <img src={bonus.img} alt={bonus.title} className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform" />
+                  <img src={bonus.img} alt={bonus.title} className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async" />
                   <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-brand-yellow text-black px-4 py-1 rounded-full font-black text-[10px] whitespace-nowrap shadow-lg">
                     #{bonus.id} - BÔNUS HOJE!
                   </div>
@@ -523,7 +541,7 @@ export default function App() {
             <div className="border-2 border-gray-100 rounded-[2.5rem] p-10 flex flex-col items-center relative hover:border-brand-yellow/30 transition-all hover:shadow-xl">
               <h3 className="text-2xl font-black uppercase mb-8">PLANO BÁSICO</h3>
               <div className="mb-10 px-4">
-                <img src="https://i.imgur.com/lcN01Ka.png" className="w-48 h-auto" alt="Básico" />
+                <img src="https://i.imgur.com/lcN01Ka.png" className="w-48 h-auto" alt="Básico" loading="lazy" decoding="async" />
               </div>
               <ul className="space-y-4 mb-12 w-full text-left text-sm">
                 <li className="flex gap-2"><Check className="w-5 h-5 text-yellow-500 shrink-0" /> Criação Lucrativa de Galinha Caipira</li>
