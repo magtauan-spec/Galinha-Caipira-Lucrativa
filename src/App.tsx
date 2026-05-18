@@ -59,6 +59,41 @@ export default function App() {
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
   const [showUpsell, setShowUpsell] = useState(false);
   const [timeLeft, setTimeLeft] = useState(899); // 14:59 in seconds
+  const [[page, direction], setPage] = useState([0, 0]);
+
+  const testimonialsImages = [
+    "https://i.imgur.com/7ZgmTPO.png",
+    "https://i.imgur.com/ODYDseW.png",
+    "https://i.imgur.com/wfqbUy4.png"
+  ];
+
+  const testimonialIdx = Math.abs(page % testimonialsImages.length);
+
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
 
   useEffect(() => {
     if (showUpsell && timeLeft > 0) {
@@ -171,7 +206,7 @@ export default function App() {
     { q: "Para quem é indicado esse material?", a: "Para qualquer pessoa que tenha quintal, sítio, chácara ou terreno e queira começar a criar galinha caipira para produzir ovos e gerar renda. Não importa o tamanho do espaço nem se nunca criou antes." },
     { q: "Preciso de conhecimento prévio para usar?", a: "Não precisa de nada. O material foi feito para quem está começando do zero. É direto, simples e fácil de aplicar no mesmo dia." },
     { q: "Funciona para quem tem pouco espaço?", a: "Sim. O material foi pensado exatamente para quem tem pouco espaço. Você aprende como começar pequeno, gastar pouco e crescer aos poucos conforme sua criação evolui." },
-    { q: "Qual a diferença entre o Plano Básico e o Completo?", a: "O Básico dá acesso ao guia principal de criação. O Completo inclui tudo isso mais os 4 bônus exclusivos que ensinam ração caseira, como evitar doenças, como vender ovos todo dia e o projeto do galinheiro. A maioria escolhe o Completo porque sai muito mais vantajoso por R$27." },
+    { q: "Qual a diferença entre o Plano Básico e o Completo?", a: "O Básico dá acesso ao guia principal de criação. O Completo inclui tudo isso mais os 4 bônus exclusivos que ensinam ração caseira, como evitar doenças, como vender ovos todo dia e o projeto do galinheiro. A maioria escolhe o Completo porque sai muito mais vantajoso por R$15." },
     { q: "Vou precisar investir muito dinheiro para aplicar?", a: "Não. O material ensina como começar com estrutura simples e barata. Um dos bônus mostra exatamente como fazer ração caseira para reduzir seus custos desde o primeiro dia." },
     { q: "E se eu não gostar do material?", a: "Você tem 7 dias de garantia total. Se por qualquer motivo não ficar satisfeito, é só pedir o reembolso e devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia." }
   ];
@@ -542,6 +577,82 @@ export default function App() {
         </div>
       </section>
 
+      {/* Testimonials Prints Section */}
+      <section className="bg-gray-50 py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <SectionTitle className="text-black mb-12 uppercase">QUEM JÁ USOU, <span className="bg-brand-yellow px-2">APROVOU</span></SectionTitle>
+          
+          <div className="relative group px-4 max-w-sm mx-auto h-[600px] flex flex-col">
+            <div className="relative flex-1">
+              {/* Arrows */}
+              <button 
+                onClick={() => paginate(-1)}
+                className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform text-black border border-gray-100"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => paginate(1)}
+                className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform text-black border border-gray-100"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              {/* Slider Container */}
+              <div className="relative h-full overflow-hidden group">
+                <AnimatePresence initial={false} custom={direction}>
+                  <motion.div
+                    key={page}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 }
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={1}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipe = swipePower(offset.x, velocity.x);
+
+                      if (swipe < -swipeConfidenceThreshold) {
+                        paginate(1);
+                      } else if (swipe > swipeConfidenceThreshold) {
+                        paginate(-1);
+                      }
+                    }}
+                    className="absolute inset-0 w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing"
+                  >
+                    <img 
+                      src={testimonialsImages[testimonialIdx]} 
+                      alt={`Depoimento ${testimonialIdx + 1}`} 
+                      className="max-w-full max-h-full object-contain pointer-events-none select-none rounded-2xl shadow-xl"
+                      referrerPolicy="no-referrer"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {testimonialsImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage([i, i > testimonialIdx ? 1 : -1])}
+                  className={`w-2 h-2 rounded-full transition-all ${testimonialIdx === i ? 'bg-brand-yellow w-6' : 'bg-gray-300'}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 10. Pricing Section */}
       <section id="offer" className="bg-white text-black py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
@@ -609,7 +720,7 @@ export default function App() {
               </ul>
               <div className="mt-auto">
                 <p className="text-gray-400 line-through text-sm">de R$197,00 por:</p>
-                <p className="text-5xl font-black text-green-600 mb-2">R$27,00</p>
+                <p className="text-5xl font-black text-green-600 mb-2">R$15,00</p>
                 <p className="text-sm font-bold text-yellow-600 mb-8">MELHOR OPÇÃO - COMPLETO</p>
                 <motion.div
                   animate={{ scale: [1, 1.03, 1] }}
@@ -651,31 +762,6 @@ export default function App() {
           <div>
             <h3 className="text-2xl font-black uppercase mb-2">GARANTIA INCONDICIONAL DE 7 DIAS</h3>
             <p className="text-gray-600 text-sm leading-relaxed">Se por qualquer motivo você não ficar satisfeito com o material, basta solicitar o reembolso em até 7 dias após a compra e devolveremos <span className="font-bold text-black italic">100% do seu investimento</span>. Sem perguntas, sem burocracia.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 12. Testimonials Section */}
-      <section className="bg-white text-black py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle className="text-black mb-12 uppercase">QUEM JÁ USOU, <span className="bg-brand-yellow px-2">APROVOU</span></SectionTitle>
-          <div className="grid md:grid-cols-3 gap-8 text-left">
-            {[
-              { name: "João Batista", role: "Produtor Rural — Uberaba MG", text: "Eu tinha um quintal aqui parado e não sabia nem por onde começar. Depois que peguei o material, consegui organizar tudo e já comecei a produzir ovos." },
-              { name: "Carlos Henrique", role: "Pequeno Produtor — Sinop MT", text: "Eu ficava só na tentativa e erro, perdia tempo e dinheiro. Com esse material consegui organizar minha criação e hoje já tenho renda entrando." },
-              { name: "José Aparecido", role: "Aposentado Rural — Goiânia GO", text: "Antes eu olhava pro quintal e não sabia o que fazer. Agora já comecei minha criação e ficou muito mais fácil trabalhar." }
-            ].map((t, i) => (
-              <Card key={i} className="bg-gray-50 border-gray-100 flex flex-col gap-4">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
-                </div>
-                <p className="text-gray-600 italic">"{t.text}"</p>
-                <div>
-                  <p className="font-bold">{t.name}</p>
-                  <p className="text-xs text-brand-blue">{t.role}</p>
-                </div>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
