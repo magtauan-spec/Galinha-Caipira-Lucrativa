@@ -75,7 +75,7 @@ export default function App() {
 
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? '100%' : '-100%',
       opacity: 0
     }),
     center: {
@@ -85,7 +85,7 @@ export default function App() {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? '100%' : '-100%',
       opacity: 0
     })
   };
@@ -231,7 +231,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full overflow-x-hidden">
       {/* 1. Header Banner */}
       <div className="bg-brand-red text-white py-2 text-center text-sm font-bold flex items-center justify-center gap-2">
         <Clock className="w-4 h-4" />
@@ -587,14 +587,14 @@ export default function App() {
               {/* Arrows */}
               <button 
                 onClick={() => paginate(-1)}
-                className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform text-black border border-gray-100"
+                className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-brand-yellow p-2 rounded-full shadow-lg hover:scale-110 transition-transform text-black border border-white/20"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={() => paginate(1)}
-                className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform text-black border border-gray-100"
+                className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-brand-yellow p-2 rounded-full shadow-lg hover:scale-110 transition-transform text-black border border-white/20"
                 aria-label="Próximo"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -631,7 +631,7 @@ export default function App() {
                     <img 
                       src={testimonialsImages[testimonialIdx]} 
                       alt={`Depoimento ${testimonialIdx + 1}`} 
-                      className="max-w-full max-h-full object-contain pointer-events-none select-none rounded-2xl shadow-xl"
+                      className="max-w-full max-h-full object-contain pointer-events-none select-none rounded-2xl shadow-xl border-4 border-brand-yellow"
                       referrerPolicy="no-referrer"
                     />
                   </motion.div>
